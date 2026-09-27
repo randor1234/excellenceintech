@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excellence in Tech — Honoring the Best in Technology</title>
+<meta name="description" content="Excellence in Tech honors individuals operating at the very top of their field in technology.">
+<style>
+  :root {
+    --bg: #0b0b0f;
+    --bg-alt: #121218;
+    --card: #17171f;
+    --gold: #c9a227;
+    --gold-light: #e6c757;
+    --text: #ececf1;
+    --muted: #9b9ba6;
+    --border: #26262f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 6vw;
+    background: rgba(11,11,15,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: Georgia, serif; font-size: 1.15rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light); text-decoration: none; }
+  nav ul { display: flex; gap: 2.2rem; list-style: none; }
+  nav ul a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  nav ul a:hover { color: var(--gold-light); }
+
+  /* Hero */
+  .hero {
+    min-height: 88vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 4rem 6vw;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,162,39,0.12), transparent),
+      var(--bg);
+  }
+  .hero .kicker { color: var(--gold); letter-spacing: 0.35em; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.15; max-width: 850px; }
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+  .hero p { max-width: 560px; color: var(--muted); margin: 1.8rem 0 2.5rem; font-size: 1.1rem; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    display: inline-block; padding: 0.9rem 2.4rem;
+    border: 1px solid var(--gold); color: var(--gold-light);
+    text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.8rem;
+    transition: background 0.25s, color 0.25s;
+    background: transparent; cursor: pointer; font-family: inherit;
+  }
+  .btn:hover { background: var(--gold); color: #0b0b0f; }
+  .btn.solid { background: var(--gold); color: #0b0b0f; }
+  .btn.solid:hover { background: var(--gold-light); }
+
+  /* Sections */
+  section { padding: 6rem 6vw; }
+  .section-head { text-align: center; margin-bottom: 3.5rem; }
+  .section-head .kicker { color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; font-size: 0.75rem; }
+  .section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-top: 0.6rem; }
+  .rule { width: 60px; height: 1px; background: var(--gold); margin: 1.4rem auto 0; }
+
+  /* Mission */
+  #mission { background: var(--bg-alt); }
+  .mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+  .pillar { border: 1px solid var(--border); padding: 2.2rem; background: var(--card); }
+  .pillar h3 { color: var(--gold-light); font-size: 1.2rem; margin-bottom: 0.8rem; }
+  .pillar p { color: var(--muted); font-size: 0.95rem; }
+  .mission-statement { max-width: 760px; margin: 0 auto 3.5rem; text-align: center; font-size: 1.25rem; font-family: Georgia, serif; font-style: italic; color: var(--text); }
+
+  /* Honorees */
+  .honoree-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+  .honoree { border: 1px solid var(--border); background: var(--card); padding: 2.2rem; position: relative; transition: border-color 0.25s, transform 0.25s; }
+  .honoree:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .honoree .year { position: absolute; top: 1.4rem; right: 1.6rem; color: var(--gold); font-size: 0.75rem; letter-spacing: 0.2em; }
+  .honoree .avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), #8a6d14);
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, serif; font-size: 1.4rem; color: #0b0b0f; margin-bottom: 1.4rem;
+  }
+  .honoree h3 { font-size: 1.25rem; }
+  .honoree .field { color: var(--gold-light); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin: 0.3rem 0 1rem; }
+  .honoree p { color: var(--muted); font-size: 0.92rem; }
+  .placeholder-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 2.5rem; font-style: italic; }
+
+  /* Forms (shared) */
+  form { max-width: 720px; margin: 0 auto; display: grid; gap: 1.4rem; }
+  label { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.45rem; }
+  input, textarea, select {
+    width: 100%; padding: 0.85rem 1rem;
+    background: var(--card); border: 1px solid var(--border); color: var(--text);
+    font-family: inherit; font-size: 0.95rem;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--gold); }
+  textarea { min-height: 110px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  form button { justify-self: center; margin-top: 0.5rem; }
+  .form-success { display: none; text-align: center; padding: 3rem 1rem; }
+  .form-success h3 { color: var(--gold-light); font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .form-success p { color: var(--muted); }
+  .sending { opacity: 0.55; pointer-events: none; }
+
+  /* Nominate */
+  #nominate { background: var(--bg-alt); }
+
+  /* Apply */
+  .role-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; max-width: 1200px; margin: 0 auto 3rem; }
+  .role-card {
+    border: 1px solid var(--border); background: var(--card); padding: 2rem;
+    text-align: center; cursor: pointer; transition: border-color 0.25s, transform 0.25s;
+  }
+  .role-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .role-card.selected { border-color: var(--gold); background: #1c1a12; }
+  .role-card h3 { font-size: 1.3rem; color: var(--text); }
+  .role-card .fee { font-family: Georgia, serif; font-size: 1.9rem; color: var(--gold-light); margin: 0.7rem 0 0.2rem; }
+  .role-card .fee-note { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .role-card p.desc { color: var(--muted); font-size: 0.9rem; margin-top: 1rem; }
+  .criteria-toggle {
+    display: inline-block; margin-top: 1.2rem; background: none; border: none; cursor: pointer;
+    color: var(--gold); font-family: inherit; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    border-bottom: 1px solid var(--gold); padding: 0 0 2px;
+  }
+  .criteria-toggle:hover { color: var(--gold-light); border-color: var(--gold-light); }
+  .criteria { display: none; text-align: left; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--border); }
+  .criteria.open { display: block; }
+  .criteria h4 { font-family: Georgia, serif; font-weight: 400; color: var(--gold-light); font-size: 0.95rem; margin-bottom: 0.7rem; }
+  .criteria ul { list-style: none; }
+  .criteria li { color: var(--muted); font-size: 0.85rem; padding-left: 1.1rem; position: relative; margin-bottom: 0.6rem; }
+  .criteria li::before { content: "—"; position: absolute; left: 0; color: var(--gold); }
+  .role-specific { display: none; }
+  .role-specific.active { display: contents; }
+  #apply-form-wrap { display: none; }
+  #apply-form-wrap.active { display: block; }
+  .fee-banner {
+    max-width: 720px; margin: 0 auto 2rem; padding: 1rem 1.4rem;
+    border: 1px solid var(--gold); background: #1c1a12; color: var(--gold-light);
+    font-size: 0.9rem; text-align: center;
+  }
+
+  /* Events */
+  .events-list { max-width: 800px; margin: 0 auto; }
+  .event { display: grid; grid-template-columns: 110px 1fr auto; gap: 2rem; align-items: center; padding: 2rem 0; border-bottom: 1px solid var(--border); }
+  .event:first-child { border-top: 1px solid var(--border); }
+  .event .date { text-align: center; }
+  .event .date .day { font-family: Georgia, serif; font-size: 2.2rem; color: var(--gold-light); line-height: 1; }
+  .event .date .month { letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.75rem; color: var(--muted); }
+  .event h3 { font-size: 1.2rem; }
+  .event .meta { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+  .event .btn { font-size: 0.72rem; padding: 0.7rem 1.6rem; white-space: nowrap; }
+  .event .date .day { font-size: clamp(1.4rem, 2vw, 2.2rem); }
+  .event.past { opacity: 0.65; }
+
+  .events-intro { text-align: center; color: var(--muted); max-width: 640px; margin: -1.5rem auto 2.5rem; }
+  .event-photos { display: inline-block; margin-top: 0.6rem; color: var(--gold); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .event-photos:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+  /* Photos */
+  #photos { background: var(--bg-alt); }
+  .photo-filters { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; max-width: 900px; margin: 0 auto 2.5rem; }
+  .photo-filter {
+    background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+    font-family: inherit; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 0.6rem 1.1rem; transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .photo-filter:hover { border-color: var(--gold); color: var(--gold-light); }
+  .photo-filter[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #0b0b0f; }
+  .photo-grid {
+    max-width: 1200px; margin: 0 auto; display: grid; gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); grid-auto-rows: 190px; grid-auto-flow: dense;
+  }
+  .photo { position: relative; display: block; overflow: hidden; background: var(--card); border: 1px solid var(--border); cursor: zoom-in; }
+  .photo.feature { grid-column: span 2; grid-row: span 2; }
+  .photo.tall { grid-row: span 2; }
+  .photo[hidden] { display: none; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.9); transition: transform 0.6s ease, filter 0.3s; }
+  .photo:hover img { transform: scale(1.04); filter: saturate(1); }
+  .photo:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .photo .cap {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 1.8rem 0.9rem 0.75rem;
+    background: linear-gradient(transparent, rgba(11,11,15,0.88)); color: var(--text); font-size: 0.8rem;
+    opacity: 0; transform: translateY(6px); transition: opacity 0.25s, transform 0.25s;
+  }
+  .photo:hover .cap, .photo:focus-visible .cap { opacity: 1; transform: none; }
+  .tag { display: block; color: var(--gold-light); font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .photo-note { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 2.2rem; font-style: italic; }
+  @media (hover: none) { .photo .cap { display: none; } }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(5,5,8,0.95); display: flex; align-items: center; justify-content: center; padding: 3.5rem 5rem; }
+  .lightbox[hidden] { display: none; }
+  .lightbox figure { display: flex; flex-direction: column; align-items: center; max-width: 100%; }
+  .lightbox img { max-width: 100%; max-height: calc(100vh - 10rem); object-fit: contain; border: 1px solid var(--border); background: var(--card); }
+  .lightbox figcaption { margin-top: 1rem; color: var(--muted); font-size: 0.9rem; text-align: center; }
+  .lb-btn {
+    position: absolute; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+    background: rgba(11,11,15,0.6); border: 1px solid var(--border); color: var(--gold-light);
+    font-family: Georgia, serif; font-size: 1.6rem; line-height: 1; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  }
+  .lb-btn:hover { border-color: var(--gold); background: rgba(201,162,39,0.12); }
+  .lb-close { top: 1rem; right: 1rem; }
+  .lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }
+  .lb-count { position: absolute; top: 1.6rem; left: 1.4rem; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.2em; }
+  body.lb-open { overflow: hidden; }
+  section { scroll-margin-top: 64px; }
+
+  /* Footer */
+  footer { padding: 3.5rem 6vw; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.85rem; }
+  footer .logo { display: block; margin-bottom: 1rem; }
+
+  @media (max-width: 640px) {
+    nav ul { gap: 1.1rem; }
+    nav ul a { font-size: 0.7rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .event { grid-template-columns: 80px 1fr; }
+    .event .btn { grid-column: 2; justify-self: start; }
+    nav { flex-direction: column; align-items: flex-start; gap: 0.55rem; padding: 0.8rem 6vw; }
+    nav ul { flex-wrap: wrap; gap: 0.35rem 1.1rem; }
+    section { scroll-margin-top: 108px; }
+    nav ul a { white-space: nowrap; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; gap: 0.5rem; }
+    .photo-filter { font-size: 0.66rem; padding: 0.55rem 0.8rem; }
+    .lightbox { padding: 4rem 0.5rem 5.5rem; }
+    .lb-prev, .lb-next { top: auto; bottom: 1rem; transform: none; }
+    .lb-prev { left: calc(50% - 56px); }
+    .lb-next { right: calc(50% - 56px); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">Excellence in Tech</a>
+  <ul>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#apply">Apply</a></li>
+    <li><a href="#nominate">Nominate</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#photos">Photos</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <h1>Honoring those at the <em>very top</em> of their field</h1>
+  <p>Excellence in Tech recognizes the engineers, founders, researchers, and builders whose work defines the standard everyone else aspires to.</p>
+  <div class="hero-ctas">
+    <a class="btn solid" href="#apply">Apply to Join</a>
+    <a class="btn" href="#nominate">Nominate Someone</a>
+  </div>
+</header>
+
+<section id="mission">
+  <div class="section-head">
+    <div class="kicker">Our Mission</div>
+    <h2>Why We Exist</h2>
+    <div class="rule"></div>
+  </div>
+  <p class="mission-statement">"Greatness in technology is rarely loud. We exist to find it, name it, and celebrate it — so the people setting the standard get the recognition they've earned."</p>
+  <div class="mission-grid">
+    <div class="pillar">
+      <h3>Rigor</h3>
+      <p>Honorees are selected through a careful review of impact, craft, and sustained contribution — not popularity or self-promotion.</p>
+    </div>
+    <div class="pillar">
+      <h3>Breadth</h3>
+      <p>From systems engineers to research scientists to product visionaries, we honor excellence wherever it appears in technology.</p>
+    </div>
+    <div class="pillar">
+      <h3>Legacy</h3>
+      <p>Each class of honorees becomes part of a permanent record — a living archive of the people who moved the field forward.</p>
+    </div>
+  </div>
+</section>
+
+<section id="benefits">
+  <div class="section-head">
+    <div class="kicker">Membership</div>
+    <h2>Benefits of Membership</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="mission-grid">
+    <div class="pillar">
+      <h3>Recognition</h3>
+      <p>The professional recognition of your peers for technical and professional excellence.</p>
+    </div>
+    <div class="pillar">
+      <h3>Leadership Eligibility</h3>
+      <p>Members are eligible to hold executive volunteer positions within the organization.</p>
+    </div>
+    <div class="pillar">
+      <h3>Refer Other Candidates</h3>
+      <p>Members can serve as a reference for other applicants for membership.</p>
+    </div>
+    <div class="pillar">
+      <h3>Letter of Certification</h3>
+      <p>A letter may be requested certifying the achievement of this membership.</p>
+    </div>
+    <div class="pillar">
+      <h3>Exclusive Event Invitations</h3>
+      <p>Members may be invited to exclusive events and dinners.</p>
+    </div>
+    <div class="pillar">
+      <h3>Connect with Your Peers</h3>
+      <p>Through our events and private Tribe group chat, you'll connect with a network of like-minded, successful individuals.</p>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="section-head">
+    <div class="kicker">Join Us</div>
+    <h2>Apply</h2>
+    <div class="rule"></div>
+    <p style="color:var(--muted); max-width:600px; margin:1.5rem auto 0;">Become part of the community honoring excellence in technology — as a member, a judge, a speaker at our events, or an award recipient.</p>
+  </div>
+
+  <div class="role-cards" id="role-cards">
+    <div class="role-card" data-role="Member">
+      <h3>Member</h3>
+      <p class="desc">Join a community of accomplished technologists. Attend gatherings, vote on honoree shortlists, and connect with peers at the top of their field.</p>
+      <button type="button" class="criteria-toggle">Qualifying Criteria</button>
+      <div class="criteria">
+        <h4>Membership Criteria</h4>
+        <ul>
+          <li>A record of extraordinary accomplishment in technology, demonstrated through sustained, high-impact contributions to the field.</li>
+          <li>Service as a significant contributor to an organization of recognized standing whose work has had real impact on the technology industry and the international economy.</li>
+          <li>Recognition of professional distinction by peers, industry, or independent bodies.</li>
+          <li>A demonstrated commitment to advancing the standards and integrity of the profession.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="role-card" data-role="Judge">
+      <h3>Judge</h3>
+      <p class="desc">Serve on the selection committee. Review nominations and help decide who joins the honor roll.</p>
+      <button type="button" class="criteria-toggle">Qualifying Criteria</button>
+      <div class="criteria">
+        <h4>Judging Criteria</h4>
+        <ul>
+          <li>A record of extraordinary accomplishment in technology, including senior-level contributions to an organization of recognized standing with real impact on the field and the international economy.</li>
+          <li>Domain expertise deep enough to evaluate work at the highest levels of the profession.</li>
+          <li>Experience reviewing, selecting, or assessing the work of others — award panels, program committees, peer review, or equivalent.</li>
+          <li>A reputation for impartial, rigorous judgment and freedom from disqualifying conflicts of interest.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="role-card" data-role="Speaker">
+      <h3>Speaker</h3>
+      <p class="desc">Take the stage at our galas and salons. Share your work and ideas with an audience of top-tier technologists.</p>
+      <button type="button" class="criteria-toggle">Qualifying Criteria</button>
+      <div class="criteria">
+        <h4>Speaking Criteria</h4>
+        <ul>
+          <li>A record of extraordinary accomplishment as a contributor to a significant organization whose work has had real impact on the technology field and the international economy.</li>
+          <li>Original work, insights, or perspectives that merit presentation to an audience operating at the top of the profession.</li>
+          <li>Demonstrated ability to communicate complex ideas clearly to expert audiences.</li>
+          <li>A body of work — talks, publications, products, or research — that supports the proposed topic.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="role-card" data-role="Award">
+      <h3>Award</h3>
+      <p class="desc">Be honored as an internationally recognized top contributor to your field. Award recipients receive formal recognition and join our permanent record of excellence.</p>
+      <button type="button" class="criteria-toggle">Qualifying Criteria</button>
+      <div class="criteria">
+        <h4>Award Criteria</h4>
+        <ul>
+          <li>A record of extraordinary accomplishment as a contributor to a significant organization whose work has had real impact on the technology field and the international economy.</li>
+          <li>Contributions whose influence extends beyond a single company — recognized internationally by peers, industry, or independent bodies.</li>
+          <li>A sustained body of work that has advanced the state of the field, not a single isolated achievement.</li>
+          <li>Standing among the top contributors in the applicant's field, supported by verifiable evidence.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p style="max-width:700px; margin:-1rem auto 3rem; text-align:center; color:var(--muted); font-size:0.9rem;">
+    Every application is vetted by our selection committee. Approved applicants are invited to select and purchase the package for their role.
+  </p>
+
+  <div id="apply-form-wrap">
+    <div class="fee-banner" id="fee-banner"></div>
+    <form id="apply-form">
+      <input type="hidden" name="role" id="apply-role">
+      <input type="hidden" name="categories" id="apply-categories">
+
+      <div style="border:1px solid var(--border); background:var(--card); padding:1.2rem 1.4rem;">
+        <label>Also apply for (optional)</label>
+        <div style="display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:0.5rem;">
+          <label style="display:flex; align-items:center; gap:0.5rem; text-transform:none; letter-spacing:0; font-size:0.9rem; color:var(--text); cursor:pointer; margin:0;"><input type="checkbox" class="also-cb" data-role="Member" style="width:auto;"> Member</label>
+          <label style="display:flex; align-items:center; gap:0.5rem; text-transform:none; letter-spacing:0; font-size:0.9rem; color:var(--text); cursor:pointer; margin:0;"><input type="checkbox" class="also-cb" data-role="Judge" style="width:auto;"> Judge</label>
+          <label style="display:flex; align-items:center; gap:0.5rem; text-transform:none; letter-spacing:0; font-size:0.9rem; color:var(--text); cursor:pointer; margin:0;"><input type="checkbox" class="also-cb" data-role="Speaker" style="width:auto;"> Speaker</label>
+          <label style="display:flex; align-items:center; gap:0.5rem; text-transform:none; letter-spacing:0; font-size:0.9rem; color:var(--text); cursor:pointer; margin:0;"><input type="checkbox" class="also-cb" data-role="Award" style="width:auto;"> Award</label>
+        </div>
+        <p style="color:var(--muted); font-size:0.8rem; margin-top:0.7rem;">One application covers every category you select — any additional questions appear below automatically.</p>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="ap-name">Full Name *</label>
+          <input type="text" id="ap-name" name="full_name" required>
+        </div>
+        <div>
+          <label for="ap-email">Email *</label>
+          <input type="email" id="ap-email" name="email" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="ap-phone">Phone *</label>
+          <input type="tel" id="ap-phone" name="phone" required>
+        </div>
+        <div>
+          <label for="ap-location">City &amp; Country *</label>
+          <input type="text" id="ap-location" name="location" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="ap-linkedin">LinkedIn Profile URL *</label>
+          <input type="text" id="ap-linkedin" name="linkedin" placeholder="linkedin.com/in/..." required>
+        </div>
+        <div>
+          <label for="ap-website">Personal Website / Portfolio</label>
+          <input type="text" id="ap-website" name="website">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="ap-title">Current Title *</label>
+          <input type="text" id="ap-title" name="current_title" required>
+        </div>
+        <div>
+          <label for="ap-company">Company / Organization *</label>
+          <input type="text" id="ap-company" name="company" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="ap-years">Years in Technology *</label>
+          <select id="ap-years" name="years_experience" required>
+            <option value="">Select</option>
+            <option>0–5</option>
+            <option>5–10</option>
+            <option>10–15</option>
+            <option>15–20</option>
+            <option>20+</option>
+          </select>
+        </div>
+        <div>
+          <label for="ap-field">Primary Field *</label>
+          <select id="ap-field" name="field" required>
+            <option value="">Select a field</option>
+            <option>Artificial Intelligence</option>
+            <option>Infrastructure &amp; Systems</option>
+            <option>Product &amp; Design</option>
+            <option>Security</option>
+            <option>Research &amp; Science</option>
+            <option>Leadership</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="ap-bio">Career Summary *</label>
+        <textarea id="ap-bio" name="career_summary" placeholder="A brief overview of your career — key roles, companies, and the arc of your work..." required></textarea>
+      </div>
+      <div>
+        <label for="ap-achievements">Notable Achievements *</label>
+        <textarea id="ap-achievements" name="achievements" placeholder="Products shipped, papers published, companies built, systems scaled, awards received..." required></textarea>
+      </div>
+
+      <!-- Member-specific -->
+      <div class="role-specific" data-for="Member">
+        <div>
+          <label for="ap-why">Why do you want to join Excellence in Tech? *</label>
+          <textarea id="ap-why" name="why_join"></textarea>
+        </div>
+        <div>
+          <label for="ap-contribute">What would you contribute to the community? *</label>
+          <textarea id="ap-contribute" name="contribution"></textarea>
+        </div>
+      </div>
+
+      <!-- Judge-specific -->
+      <div class="role-specific" data-for="Judge">
+        <div>
+          <label for="ap-expertise">Areas of Expertise for Judging *</label>
+          <textarea id="ap-expertise" name="judging_expertise" placeholder="The fields and types of work you're qualified to evaluate..."></textarea>
+        </div>
+        <div>
+          <label for="ap-judging-exp">Prior Judging, Review, or Selection Experience *</label>
+          <textarea id="ap-judging-exp" name="judging_experience" placeholder="Award panels, program committees, hiring committees, peer review..."></textarea>
+        </div>
+        <div>
+          <label for="ap-conflicts">Potential Conflicts of Interest</label>
+          <textarea id="ap-conflicts" name="conflicts" placeholder="Companies, individuals, or affiliations that could pose a conflict..."></textarea>
+        </div>
+      </div>
+
+      <!-- Award-specific -->
+      <div class="role-specific" data-for="Award">
+        <div>
+          <label for="ap-award-field">Field of Contribution *</label>
+          <input type="text" id="ap-award-field" name="award_field" placeholder="The field in which you seek recognition...">
+        </div>
+        <div>
+          <label for="ap-award-impact">Contributions &amp; International Impact *</label>
+          <textarea id="ap-award-impact" name="award_impact" placeholder="Describe your contributions and their impact on the field and the international economy..."></textarea>
+        </div>
+        <div>
+          <label for="ap-award-evidence">Evidence of Recognition *</label>
+          <textarea id="ap-award-evidence" name="award_evidence" placeholder="Awards, press coverage, citations, patents, industry recognition..."></textarea>
+        </div>
+        <div>
+          <label for="ap-award-references">References</label>
+          <textarea id="ap-award-references" name="award_references" placeholder="Names and contacts of leaders in your field who can attest to your contributions..."></textarea>
+        </div>
+      </div>
+
+      <!-- Speaker-specific -->
+      <div class="role-specific" data-for="Speaker">
+        <div>
+          <label for="ap-topics">Proposed Talk Topics *</label>
+          <textarea id="ap-topics" name="talk_topics" placeholder="The topics you'd like to speak on and why they matter now..."></textarea>
+        </div>
+        <div>
+          <label for="ap-speaking-exp">Speaking Experience *</label>
+          <textarea id="ap-speaking-exp" name="speaking_experience" placeholder="Conferences, keynotes, panels, podcasts — where have you spoken?"></textarea>
+        </div>
+        <div>
+          <label for="ap-talk-links">Links to Past Talks or Recordings</label>
+          <textarea id="ap-talk-links" name="talk_links" placeholder="YouTube, conference sites, podcast episodes..."></textarea>
+        </div>
+      </div>
+
+      <div>
+        <label for="ap-referral">How did you hear about us?</label>
+        <input type="text" id="ap-referral" name="referral">
+      </div>
+
+      <button class="btn solid" type="submit" id="apply-submit">Submit Application</button>
+    </form>
+    <div class="form-success" id="apply-success">
+      <h3>Application Received</h3>
+      <p id="apply-success-msg">Thank you. Our selection committee reviews every application carefully. If approved, you'll receive an invitation to select and purchase your package.</p>
+    </div>
+  </div>
+</section>
+
+<section id="nominate">
+  <div class="section-head">
+    <div class="kicker">Nominations</div>
+    <h2>Know Someone Exceptional?</h2>
+    <div class="rule"></div>
+  </div>
+  <form id="nomination-form">
+    <div class="form-row">
+      <div>
+        <label for="nominee">Nominee Name *</label>
+        <input type="text" id="nominee" name="nominee" required>
+      </div>
+      <div>
+        <label for="field">Field *</label>
+        <select id="field" name="field" required>
+          <option value="">Select a field</option>
+          <option>Artificial Intelligence</option>
+          <option>Infrastructure &amp; Systems</option>
+          <option>Product &amp; Design</option>
+          <option>Security</option>
+          <option>Research &amp; Science</option>
+          <option>Leadership</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div>
+      <label for="reason">Why do they deserve this honor? *</label>
+      <textarea id="reason" name="reason" placeholder="Describe their work, impact, and what sets them apart..." required></textarea>
+    </div>
+    <div class="form-row">
+      <div>
+        <label for="your-name">Your Name *</label>
+        <input type="text" id="your-name" name="your_name" required>
+      </div>
+      <div>
+        <label for="your-email">Your Email *</label>
+        <input type="email" id="your-email" name="your_email" required>
+      </div>
+    </div>
+    <button class="btn solid" type="submit">Submit Nomination</button>
+  </form>
+  <div class="form-success" id="form-success">
+    <h3>Nomination Received</h3>
+    <p>Thank you. Our selection committee reviews every nomination carefully.</p>
+  </div>
+</section>
+
+<section id="events">
+  <div class="section-head">
+    <div class="kicker">Gatherings</div>
+    <h2>Events</h2>
+    <div class="rule"></div>
+  </div>
+  <p class="events-intro" id="events-intro">Three gatherings so far in 2026. Our next one will be announced soon.</p>
+  <div class="events-list">
+    <!-- EVENTS:START (newest first; the weekly updater edits between these markers) -->
+    <div class="event" data-date="2026-09-23">
+      <div class="date"><div class="day">23</div><div class="month">Sep 2026</div></div>
+      <div>
+        <h3>Excellence in Tech: Enterprise AI Adoption</h3>
+        <div class="meta">Past event · Wednesday, September 23 · Fireside with Amandeep Khurana, Forward Deployed Engineering Leader at Anthropic · From AI experimentation to real-world adoption · Redwood City, CA</div>
+        <a class="event-photos" href="#photos" data-filter="sep23">See photos &rarr;</a>
+      </div>
+      <a class="btn" href="https://luma.com/054l23aa" target="_blank" rel="noopener">View Event</a>
+    </div>
+    <div class="event" data-date="2026-08-19">
+      <div class="date"><div class="day">19</div><div class="month">Aug 2026</div></div>
+      <div>
+        <h3>Excellence in Tech: The Future of Consumer AI</h3>
+        <div class="meta">Past event · Wednesday, August 19 · Fireside with Karandeep Anand, CEO of Character.AI · Lightning talks &amp; networking · Redwood City, CA</div>
+        <a class="event-photos" href="#photos" data-filter="aug19">See photos &rarr;</a>
+      </div>
+      <a class="btn" href="https://luma.com/lvflmt3d" target="_blank" rel="noopener">View Event</a>
+    </div>
+    <div class="event" data-date="2026-06-09">
+      <div class="date"><div class="day">09</div><div class="month">Jun 2026</div></div>
+      <div>
+        <h3>Excellence in Tech: AI Agents</h3>
+        <div class="meta">Past event · Tuesday, June 9 · Featuring Gabor Cselle (Leads AI at Google Workspace, former OpenAI) · Keynote, curated presentations &amp; recognition awards · Redwood City, CA</div>
+        <a class="event-photos" href="#photos" data-filter="jun9">See photos &rarr;</a>
+      </div>
+      <a class="btn" href="https://luma.com/wnl5iw13" target="_blank" rel="noopener">View Event</a>
+    </div>
+    <!-- EVENTS:END -->
+  </div>
+</section>
+
+<section id="photos">
+  <div class="section-head">
+    <div class="kicker">In the Room</div>
+    <h2>Moments from Our Gatherings</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="photo-filters" role="group" aria-label="Filter photos by event">
+    <button class="photo-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+    <button class="photo-filter" type="button" data-filter="sep23" aria-pressed="false">Sep 23 · Enterprise AI Adoption</button>
+    <button class="photo-filter" type="button" data-filter="aug19" aria-pressed="false">Aug 19 · The Future of Consumer AI</button>
+    <button class="photo-filter" type="button" data-filter="jun9" aria-pressed="false">Jun 9 · AI Agents</button>
+  </div>
+  <div class="photo-grid" id="photo-grid">
+    <a class="photo feature" href="photos/eit-sep23-01-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-01-800.jpg" srcset="photos/eit-sep23-01-800.jpg 800w, photos/eit-sep23-01-1600.jpg 1600w" sizes="(max-width: 640px) 100vw, 600px" width="800" height="450" alt="Fireside conversation on enterprise AI adoption — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Fireside conversation on enterprise AI adoption</span>
+    </a>
+    <a class="photo feature" href="photos/eit-sep23-02-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-02-800.jpg" srcset="photos/eit-sep23-02-800.jpg 800w, photos/eit-sep23-02-1600.jpg 1599w" sizes="(max-width: 640px) 100vw, 600px" width="800" height="450" alt="Group photo from our September gathering — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Group photo from our September gathering</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-03-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-03-800.jpg" srcset="photos/eit-sep23-03-800.jpg 800w, photos/eit-sep23-03-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="423" alt="Guests at the Excellence in Tech backdrop — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Guests at the Excellence in Tech backdrop</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-04-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-04-800.jpg" srcset="photos/eit-sep23-04-800.jpg 800w, photos/eit-sep23-04-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Lightning talk — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Lightning talk</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-05-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-05-800.jpg" srcset="photos/eit-sep23-05-800.jpg 800w, photos/eit-sep23-05-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="In the audience — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>In the audience</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-06-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-06-800.jpg" srcset="photos/eit-sep23-06-800.jpg 800w, photos/eit-sep23-06-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Conversations after the fireside — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Conversations after the fireside</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-07-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-07-800.jpg" srcset="photos/eit-sep23-07-800.jpg 800w, photos/eit-sep23-07-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Meeting fellow builders — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Meeting fellow builders</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-08-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-08-800.jpg" srcset="photos/eit-sep23-08-800.jpg 800w, photos/eit-sep23-08-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Making connections — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Making connections</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-09-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-09-800.jpg" srcset="photos/eit-sep23-09-800.jpg 800w, photos/eit-sep23-09-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Between sessions — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Between sessions</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-10-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-10-800.jpg" srcset="photos/eit-sep23-10-800.jpg 800w, photos/eit-sep23-10-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Presenting to the room — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Presenting to the room</span>
+    </a>
+    <a class="photo" href="photos/eit-sep23-11-1600.jpg" data-event="sep23">
+      <img src="photos/eit-sep23-11-800.jpg" srcset="photos/eit-sep23-11-800.jpg 800w, photos/eit-sep23-11-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="450" alt="Networking over food and drinks — Excellence in Tech, Sep 23, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Sep 23 · Enterprise AI Adoption</span>Networking over food and drinks</span>
+    </a>
+    <a class="photo tall" href="photos/eit-aug19-01-1600.jpg" data-event="aug19">
+      <img src="photos/eit-aug19-01-800.jpg" srcset="photos/eit-aug19-01-800.jpg 800w, photos/eit-aug19-01-1600.jpg 1440w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="1067" alt="Fireside conversation on the future of consumer AI — Excellence in Tech, Aug 19, 2026" loading="lazy" decoding="async" style="object-position: 50% 70%">
+      <span class="cap"><span class="tag">Aug 19 · The Future of Consumer AI</span>Fireside conversation on the future of consumer AI</span>
+    </a>
+    <a class="photo" href="photos/eit-aug19-02-1600.jpg" data-event="aug19">
+      <img src="photos/eit-aug19-02-800.jpg" srcset="photos/eit-aug19-02-800.jpg 800w, photos/eit-aug19-02-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="600" alt="A full room in Redwood City — Excellence in Tech, Aug 19, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Aug 19 · The Future of Consumer AI</span>A full room in Redwood City</span>
+    </a>
+    <a class="photo" href="photos/eit-aug19-03-1600.jpg" data-event="aug19">
+      <img src="photos/eit-aug19-03-800.jpg" srcset="photos/eit-aug19-03-800.jpg 800w, photos/eit-aug19-03-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="600" alt="Setting the stage before doors open — Excellence in Tech, Aug 19, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Aug 19 · The Future of Consumer AI</span>Setting the stage before doors open</span>
+    </a>
+    <a class="photo feature" href="photos/eit-jun9-01-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-01-800.jpg" srcset="photos/eit-jun9-01-800.jpg 800w, photos/eit-jun9-01-1600.jpg 1600w" sizes="(max-width: 640px) 100vw, 600px" width="800" height="533" alt="Keynote: “The Gemini Transformation” — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Keynote: “The Gemini Transformation”</span>
+    </a>
+    <a class="photo tall" href="photos/eit-jun9-02-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-02-800.jpg" srcset="photos/eit-jun9-02-800.jpg 800w, photos/eit-jun9-02-1600.jpg 1440w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="1067" alt="Welcome to our first gathering — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Welcome to our first gathering</span>
+    </a>
+    <a class="photo feature" href="photos/eit-jun9-03-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-03-800.jpg" srcset="photos/eit-jun9-03-800.jpg 800w, photos/eit-jun9-03-1600.jpg 1600w" sizes="(max-width: 640px) 100vw, 600px" width="800" height="533" alt="Group photo from our first gathering — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Group photo from our first gathering</span>
+    </a>
+    <a class="photo" href="photos/eit-jun9-04-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-04-800.jpg" srcset="photos/eit-jun9-04-800.jpg 800w, photos/eit-jun9-04-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="533" alt="Keynote and Q&amp;A — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Keynote and Q&amp;A</span>
+    </a>
+    <a class="photo" href="photos/eit-jun9-05-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-05-800.jpg" srcset="photos/eit-jun9-05-800.jpg 800w, photos/eit-jun9-05-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="533" alt="Open discussion — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Open discussion</span>
+    </a>
+    <a class="photo" href="photos/eit-jun9-06-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-06-800.jpg" srcset="photos/eit-jun9-06-800.jpg 800w, photos/eit-jun9-06-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="533" alt="Making connections — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Making connections</span>
+    </a>
+    <a class="photo" href="photos/eit-jun9-07-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-07-800.jpg" srcset="photos/eit-jun9-07-800.jpg 800w, photos/eit-jun9-07-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="533" alt="Conversations continue — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Conversations continue</span>
+    </a>
+    <a class="photo" href="photos/eit-jun9-08-1600.jpg" data-event="jun9">
+      <img src="photos/eit-jun9-08-800.jpg" srcset="photos/eit-jun9-08-800.jpg 800w, photos/eit-jun9-08-1600.jpg 1600w" sizes="(max-width: 640px) 50vw, 300px" width="800" height="533" alt="Meeting fellow builders — Excellence in Tech, Jun 9, 2026" loading="lazy" decoding="async">
+      <span class="cap"><span class="tag">Jun 9 · AI Agents</span>Meeting fellow builders</span>
+    </a>
+  </div>
+  <p class="photo-note">Photos shared by our community in the Excellence in Tech group on Tribe.</p>
+</section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <div class="lb-count" id="lb-count"></div>
+  <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Previous photo">&#8249;</button>
+  <figure>
+    <img id="lb-img" alt="">
+    <figcaption id="lb-cap"></figcaption>
+  </figure>
+  <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Next photo">&#8250;</button>
+</div>
+
+<footer>
+  <a class="logo" href="#top">Excellence in Tech</a>
+  <p>Honoring those operating at the very top of their field.</p>
+  <p>&copy; 2026 Excellence in Tech. All rights reserved.</p>
+</footer>
+
+<script>
+  // ===== CONFIG =====
+  // Google Apps Script web app URL (receives submissions, writes to Sheet, sends email)
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbwgVGtTNgD3C_eXTFwHjSJGvgG48rPK8dWT0mN5i4UeYaHlXK7TWX-8oHUtgAQ3vseA1w/exec";
+
+  // ----- Apply: role selection -----
+  var roleCards = document.querySelectorAll('.role-card');
+  var formWrap = document.getElementById('apply-form-wrap');
+  var feeBanner = document.getElementById('fee-banner');
+  var roleInput = document.getElementById('apply-role');
+
+  // Criteria toggles (don't trigger role selection)
+  document.querySelectorAll('.criteria-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      btn.nextElementSibling.classList.toggle('open');
+    });
+  });
+
+  var alsoBoxes = document.querySelectorAll('.also-cb');
+
+  function activeRoles() {
+    var roles = [roleInput.value];
+    alsoBoxes.forEach(function (b) {
+      if (b.checked && b.dataset.role !== roleInput.value) roles.push(b.dataset.role);
+    });
+    return roles;
+  }
+
+  function refreshBlocks() {
+    var roles = activeRoles();
+    document.querySelectorAll('.role-specific').forEach(function (block) {
+      var active = roles.indexOf(block.dataset.for) !== -1;
+      block.classList.toggle('active', active);
+      block.querySelectorAll('textarea, input, select').forEach(function (el) {
+        var lbl = el.closest('div') && el.closest('div').querySelector('label');
+        el.required = active && lbl && lbl.textContent.indexOf('*') !== -1;
+      });
+    });
+    alsoBoxes.forEach(function (b) {
+      var wrap = b.closest('label');
+      if (b.dataset.role === roleInput.value) { b.checked = false; wrap.style.display = 'none'; }
+      else { wrap.style.display = 'flex'; }
+    });
+    var label = roles.join(' + ');
+    feeBanner.textContent = label + ' application — reviewed by our selection committee. If approved, you’ll be invited to select and purchase the package' + (roles.length > 1 ? 's' : '') + ' for your selected categor' + (roles.length > 1 ? 'ies' : 'y') + '.';
+  }
+
+  alsoBoxes.forEach(function (b) { b.addEventListener('change', refreshBlocks); });
+
+  roleCards.forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.criteria')) return;
+      roleCards.forEach(function (c) { c.classList.remove('selected'); });
+      card.classList.add('selected');
+      roleInput.value = card.dataset.role;
+      formWrap.classList.add('active');
+      refreshBlocks();
+      formWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ----- Submission helper -----
+  function submitForm(form, formType, onDone) {
+    var data = new URLSearchParams();
+    data.append('formType', formType);
+    new FormData(form).forEach(function (value, key) {
+      // Skip fields from hidden role-specific blocks
+      var el = form.elements[key];
+      data.append(key, value);
+    });
+    if (ENDPOINT && ENDPOINT.indexOf('http') === 0) {
+      form.classList.add('sending');
+      fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: data })
+        .catch(function () { /* opaque response; treat as sent */ })
+        .finally(function () { form.classList.remove('sending'); onDone(); });
+    } else {
+      onDone();
+    }
+  }
+
+  // ----- Apply form -----
+  document.getElementById('apply-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = this;
+    var roles = activeRoles();
+    document.getElementById('apply-categories').value = roles.join(', ');
+    submitForm(form, 'Application - ' + roles.join(' + '), function () {
+      form.style.display = 'none';
+      feeBanner.style.display = 'none';
+      document.getElementById('apply-success').style.display = 'block';
+    });
+  });
+
+  // ----- Nomination form -----
+  document.getElementById('nomination-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = this;
+    submitForm(form, 'Nomination', function () {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    });
+  });
+
+  // ----- Photos: filter + lightbox -----
+  (function () {
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('#photo-grid .photo'));
+    var filters = document.querySelectorAll('.photo-filter');
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lb-img');
+    var lbCap = document.getElementById('lb-cap');
+    var lbCount = document.getElementById('lb-count');
+    var visible = tiles, idx = 0, lastFocus = null;
+
+    function setFilter(key) {
+      filters.forEach(function (f) { f.setAttribute('aria-pressed', f.dataset.filter === key ? 'true' : 'false'); });
+      tiles.forEach(function (t) { t.hidden = !(key === 'all' || t.dataset.event === key); });
+      visible = tiles.filter(function (t) { return !t.hidden; });
+    }
+    filters.forEach(function (f) { f.addEventListener('click', function () { setFilter(f.dataset.filter); }); });
+
+    document.querySelectorAll('.event-photos').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        setFilter(a.dataset.filter);
+        document.getElementById('photos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    function show(i) {
+      idx = (i + visible.length) % visible.length;
+      var t = visible[idx], img = t.querySelector('img');
+      lbImg.src = t.href;
+      lbImg.alt = img.alt;
+      lbCap.innerHTML = t.querySelector('.cap').innerHTML;
+      lbCount.textContent = (idx + 1) + ' / ' + visible.length;
+    }
+    function open(i) {
+      lastFocus = document.activeElement;
+      show(i);
+      lb.hidden = false;
+      document.body.classList.add('lb-open');
+      document.getElementById('lb-close').focus();
+    }
+    function close() {
+      lb.hidden = true;
+      lbImg.removeAttribute('src');
+      document.body.classList.remove('lb-open');
+      if (lastFocus) lastFocus.focus();
+    }
+    tiles.forEach(function (t) {
+      t.addEventListener('click', function (e) { e.preventDefault(); open(visible.indexOf(t)); });
+    });
+    document.getElementById('lb-close').addEventListener('click', close);
+    document.getElementById('lb-prev').addEventListener('click', function () { show(idx - 1); });
+    document.getElementById('lb-next').addEventListener('click', function () { show(idx + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(idx - 1);
+      else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+    var x0 = null;
+    lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    });
+  })();
+</script>
+
+</body>
+</html>

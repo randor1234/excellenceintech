@@ -1,0 +1,10 @@
+# Static site: publish the repo root, no build step.
+[build]
+  publish = "."
+  command = ""
+
+# Photos never change once published under a given name, so let browsers cache them.
+[[headers]]
+  for = "/photos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
